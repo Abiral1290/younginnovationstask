@@ -16,17 +16,24 @@ BaseCubit<ImageListState, List<ImageListResponse>>{
   ImageListCubit(this._apiRepository) : super(const ImageListStateLoading(),[]);
 
 
-  Future<void> getImageList() async{
+  Future<void> getImageList({required ImageListRequest imageListRequest}) async{
     if(isBusy) return;
 
     await run(() async{
-      final response = await _apiRepository.getSearchList(searchRequest: ImageListRequest());
+      final response = await _apiRepository.getSearchList(
+          searchRequest: imageListRequest);
 
       if(response is DataSuccess){
-        final imageList = response.data;
-
-        log("my dasda $imageList");
-        emit(ImageListStateSuccess(imageListResponse: imageList!,));
+        List<ImageListResponse>? imageList =[];
+        if(imageListRequest.page > 1){
+          imageList.addAll(response.data!);
+          emit(ImageListStateSuccess(imageListResponse: imageList!,));
+        }else{
+           imageList = response.data!;
+          final imageLists = response.data;
+          log("my dasda $imageList");
+          emit(ImageListStateSuccess(imageListResponse: imageLists!,));
+        }
       }else if(response is DataFailed){
         emit(ImageListStateFailed(exception: DioException(requestOptions:
         RequestOptions(path: response.toString()))));

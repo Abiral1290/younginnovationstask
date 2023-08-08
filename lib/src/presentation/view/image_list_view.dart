@@ -9,24 +9,28 @@ class ImageListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Text(
-          imageListResponse.user ?? '',
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontFamily: 'Butler',
-            fontWeight: FontWeight.w900,
-            fontSize: 18,
-            color: Colors.black87,
+    return SizedBox(
+      height: 700,
+      width: 80,
+      child: Column(
+        children: [
+          Text(
+            imageListResponse.user ?? '',
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontFamily: 'Butler',
+              fontWeight: FontWeight.w900,
+              fontSize: 18,
+              color: Colors.black87,
+            ),
           ),
-        ),
-       // FittedBox(
-       //   fit: BoxFit.fill,
-       //     child: Image.network(imageListResponse.userImageURL.toString())),
-        Divider(),
-      ],
+          FittedBox(
+            fit: BoxFit.fill,
+              child: Image.network(imageListResponse.userImageURL.toString())),
+          Divider(),
+        ],
+      ),
     );
   }
 }

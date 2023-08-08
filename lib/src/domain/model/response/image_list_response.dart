@@ -1,4 +1,9 @@
+import 'package:floor/floor.dart';
+import 'package:younginnovationstask/src/utilis/constants/strings.dart';
+
+@Entity(tableName: imageTableName)
 class ImageListResponse {
+  @PrimaryKey(autoGenerate: true)
   int? id;
   String? pageURL;
   String? type;

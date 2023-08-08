@@ -17,9 +17,7 @@ BaseApiRepository implements ApiRepository{
   Future<DataState<List<ImageListResponse>>>
   getSearchList({required ImageListRequest searchRequest}) {
     // TODO: implement repository
-    return getstate<List<ImageListResponse>>(request: ()=> imageListApiServices.getImageList());
+    return getstate<List<ImageListResponse>>(request: ()=> imageListApiServices.
+    getImageList(searchRequest.searchKeywords,searchRequest.page));
   }
-
-
-
 }

@@ -13,6 +13,7 @@ abstract class ImageListApiServices{
   _ImageListApiServices;
 
   @GET("$apiKey")
-  Future<HttpResponse<List<ImageListResponse>>> getImageList();
+  Future<HttpResponse<List<ImageListResponse>>>
+  getImageList(@Query('q') String query,@Query('page') int page);
 
 }

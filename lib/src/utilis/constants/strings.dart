@@ -7,5 +7,5 @@ const String apiKey = '?key=38694853-16327057edc4b85f69d46ce21';
 const String defaultSources = 'countriesnow.space';
 
 // Storage and Databases
-const String countryTableName = 'country_table';
+const String imageTableName = 'image_table';
 const String databaseName = 'app_database.db';
