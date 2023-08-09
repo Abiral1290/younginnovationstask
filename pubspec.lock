@@ -435,6 +435,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.3"
+  mockito:
+    dependency: "direct main"
+    description:
+      name: mockito
+      sha256: "7d5b53bcd556c1bc7ffbe4e4d5a19c3e112b7e925e9e172dd7c6ad0630812616"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.4.2"
   nested:
     dependency: transitive
     description:
@@ -528,6 +536,22 @@ packages:
     description:
       name: shelf_web_socket
       sha256: "9ca081be41c60190ebcb4766b2486a7d50261db7bd0f5d9615f2d653637a84c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
+  shimmer:
+    dependency: "direct main"
+    description:
+      name: shimmer
+      sha256: "5f88c883a22e9f9f299e5ba0e4f7e6054857224976a5d9f839d4ebdc94a14ac9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
+  shimmer_effect:
+    dependency: "direct main"
+    description:
+      name: shimmer_effect
+      sha256: d6c894a17e376683dfd77e09f9f97e34a2f152bce3f9b1c8d9aadd03a335804d
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"

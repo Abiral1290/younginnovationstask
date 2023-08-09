@@ -19,10 +19,12 @@ class FavouriteImageListCubit extends BaseCubit<FavouriteImageListState,List<Ima
   }
 
   Future<void> insertFavoriteImage({required ImageListResponse imageListResponse})async{
+    await _databaseRepository.insertImage(imageListResponse);
     emit(await _getFavouriteImageList());
   }
 
   Future<void> removeFavoriteImage(ImageListResponse imageListResponse)async{
+    await _databaseRepository.removeImage(imageListResponse);
     emit(await _getFavouriteImageList());
   }
 

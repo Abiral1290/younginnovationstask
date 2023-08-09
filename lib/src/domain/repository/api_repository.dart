@@ -9,4 +9,7 @@ abstract class ApiRepository{
  Future<DataState<List<ImageListResponse>>> getSearchList({
   required ImageListRequest searchRequest
 });
+
+ List<ImageListResponse>? imageList ;
+
 }

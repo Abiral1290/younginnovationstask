@@ -20,18 +20,21 @@ BaseCubit<ImageListState, List<ImageListResponse>>{
     if(isBusy) return;
 
     await run(() async{
+      log("my page increase ${imageListRequest.page.toString()}");
       final response = await _apiRepository.getSearchList(
           searchRequest: imageListRequest);
 
       if(response is DataSuccess){
-        List<ImageListResponse>? imageList =[];
+        //List<ImageListResponse>? imageList =[];
         if(imageListRequest.page > 1){
-          imageList.addAll(response.data!);
-          emit(ImageListStateSuccess(imageListResponse: imageList!,));
+          log("my list log ${ _apiRepository.imageList!.length}");
+           _apiRepository.imageList!.addAll(response.data!);
+          log("my list log ${ _apiRepository.imageList}");
+          emit(ImageListStateSuccess(imageListResponse:  _apiRepository.imageList!,));
         }else{
-           imageList = response.data!;
+          _apiRepository.imageList = response.data!;
           final imageLists = response.data;
-          log("my dasda $imageList");
+          log("my dasda ${_apiRepository.imageList }");
           emit(ImageListStateSuccess(imageListResponse: imageLists!,));
         }
       }else if(response is DataFailed){

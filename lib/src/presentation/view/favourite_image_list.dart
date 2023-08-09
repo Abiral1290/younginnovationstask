@@ -10,7 +10,28 @@ class FavouriteImageList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
+    Widget button({required VoidCallback onTap,required String text}) => TextButton(
+      onPressed:  onTap,
+      child:  Text(text),
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert({required VoidCallback onTapYes,required VoidCallback onTapNo} ) => AlertDialog(
+      title: const Text("Delete Image"),
+      content: const Text("Would you like to image?"),
+      actions: [
+        button(onTap: onTapNo, text: "No"),
+        button(onTap: onTapYes, text: "Yes")
+      ],
+    );
+
+
+
+
     return Scaffold(
+      appBar: AppBar(),
       body: BlocBuilder<FavouriteImageListCubit,FavouriteImageListState>(
           builder:(_,state){
             switch(state.runtimeType){
@@ -20,28 +41,69 @@ class FavouriteImageList extends StatelessWidget {
                 return const Center(child: Text('No Data'),);
               case FavouriteImageListStateSuccess:
                 return   CustomScrollView(
-
                   shrinkWrap: true,
                   slivers: [
                     SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                            childCount: state.favouriteImageList.length +1,
+                            childCount: state.favouriteImageList.length,
                                 (context, index){
-                              if(index < state.favouriteImageList.length){
-                                return FittedBox(
-                                    fit: BoxFit.fill,
-                                    child: Image.network(
-                                        state.favouriteImageList
-                                        [index].largeImageURL.toString()));
-                              }else{
-                                return const Padding(
-                                  padding:  EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child:  CircularProgressIndicator(),
-                                  ),
-                                );
+                                 return Container(
+                                   height: 300,
+                                   width: 500,
+                                   child: Column(
+                                    children: [
+                                      InkWell(
+                                        onTap: (){
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return alert(onTapNo: (){
+                                                Navigator.pop(context);
+                                              }, onTapYes: () {
+                                                BlocProvider.of<FavouriteImageListCubit>(context).
+                                                removeFavoriteImage(state.favouriteImageList[index]);
+                                                const snackBar = SnackBar(
+                                                  content:  Text('Image removed'),
+                                                );
+                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                                Navigator.pop(context);
+                                              });
+                                            },
+                                          );
+                                        },
+                                        child: FittedBox(
+                                            fit: BoxFit.fill,
+                                            child: Image.network(
+                                                 state.favouriteImageList
+                                                [index].largeImageURL.toString())),
+                                      ),
+                                      Text(state.favouriteImageList[index].user!)
+                                      // CircleAvatar(
+                                      //    backgroundColor: Colors.white,
+                                      //   child: IconButton(onPressed: (){
+                                      //     // show the dialog
+                                      //     // showDialog(
+                                      //     //   context: context,
+                                      //     //   builder: (BuildContext context) {
+                                      //     //     return alert(onTapNo: (){
+                                      //     //
+                                      //     //     }, onTapYes: () {
+                                      //     //       BlocProvider.of<FavouriteImageListCubit>(context).
+                                      //     //       removeFavoriteImage(state.favouriteImageList[index]);
+                                      //     //       const snackBar = SnackBar(
+                                      //     //         content:  Text('Image removed'),
+                                      //     //       );
+                                      //     //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                      //     //
+                                      //     //     });
+                                      //     //   },
+                                      //     // );
+                                      //   }, icon: const Icon(Icons.delete)),
+                                      // )
+                                    ],
+                                ),
+                                 );
                               }
-                            }
                         ), gridDelegate:
                     SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

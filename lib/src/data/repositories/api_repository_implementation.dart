@@ -20,4 +20,7 @@ BaseApiRepository implements ApiRepository{
     return getstate<List<ImageListResponse>>(request: ()=> imageListApiServices.
     getImageList(searchRequest.searchKeywords,searchRequest.page));
   }
+
+  @override
+  List<ImageListResponse>? imageList;
 }
