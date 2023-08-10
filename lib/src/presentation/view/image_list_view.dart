@@ -14,24 +14,24 @@ class ImageListView extends StatelessWidget {
       return Container(
         decoration:   BoxDecoration(
           border: Border.all(
-              color:   Color(0xFF000000),
+              color:  Theme.of(context).primaryColorLight,
               width: 2.0,
               style: BorderStyle.solid), //Border.all
           borderRadius: const BorderRadius.all(
             Radius.circular(10),
           ),
         ),
-        child: Expanded(
-          child: Column(
-            children: [
-              InkWell(
+        child: Column(
+          children: [
+            Expanded(
+              child: InkWell(
                 onTap: onTap,
                 child: Image.network(
                     imageListResponse.largeImageURL.toString()),
               ),
-              Text(imageListResponse.user!,style: Theme.of(context).textTheme.titleLarge,)
-            ],
-          ),
+            ),
+            Text(imageListResponse.user!,style: Theme.of(context).textTheme.titleLarge,)
+          ],
         ),
       );
 

@@ -20,19 +20,6 @@ void main() {
        ]
   );
 
-  //setUp(() => mockApiRepository = MockApiRepository());
-
-
-
-  // test('requestNews should fetch news', () async {
-  //   when(mockApiRepository.getCountryList(request:  CountryRequest(
-  //   ))).thenAnswer((_) async{
-  //     // log(country.toString());
-  //     // return country;
-  //   });
-  //   expect(country, mockApiRepository.getCountryList(request: CountryRequest()));
-  // });
-
   test('request fetch list', ()async{
     log(country.toString());
 

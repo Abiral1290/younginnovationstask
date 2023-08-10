@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:younginnovationstask/src/presentation/bloc/cubit/search_list_cubit.dart';
 import 'package:younginnovationstask/src/presentation/bloc/state/favourite_image_list_state.dart';
 import 'package:younginnovationstask/src/presentation/view/image_list_view.dart';
+import 'package:younginnovationstask/src/utilis/constants/strings.dart';
 
 
 class FavouriteImageList extends StatelessWidget {
@@ -31,7 +32,9 @@ class FavouriteImageList extends StatelessWidget {
 
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(favouriteImageList),
+      ),
       body: BlocBuilder<FavouriteImageListCubit,FavouriteImageListState>(
           builder:(_,state){
             switch(state.runtimeType){
@@ -47,61 +50,26 @@ class FavouriteImageList extends StatelessWidget {
                         delegate: SliverChildBuilderDelegate(
                             childCount: state.favouriteImageList.length,
                                 (context, index){
-                                 return Container(
-                                   height: 300,
-                                   width: 500,
-                                   child: Column(
-                                    children: [
-                                      InkWell(
-                                        onTap: (){
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return alert(onTapNo: (){
-                                                Navigator.pop(context);
-                                              }, onTapYes: () {
-                                                BlocProvider.of<FavouriteImageListCubit>(context).
-                                                removeFavoriteImage(state.favouriteImageList[index]);
-                                                const snackBar = SnackBar(
-                                                  content:  Text('Image removed'),
-                                                );
-                                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                          );
-                                        },
-                                        child: FittedBox(
-                                            fit: BoxFit.fill,
-                                            child: Image.network(
-                                                 state.favouriteImageList
-                                                [index].largeImageURL.toString())),
-                                      ),
-                                      Text(state.favouriteImageList[index].user!)
-                                      // CircleAvatar(
-                                      //    backgroundColor: Colors.white,
-                                      //   child: IconButton(onPressed: (){
-                                      //     // show the dialog
-                                      //     // showDialog(
-                                      //     //   context: context,
-                                      //     //   builder: (BuildContext context) {
-                                      //     //     return alert(onTapNo: (){
-                                      //     //
-                                      //     //     }, onTapYes: () {
-                                      //     //       BlocProvider.of<FavouriteImageListCubit>(context).
-                                      //     //       removeFavoriteImage(state.favouriteImageList[index]);
-                                      //     //       const snackBar = SnackBar(
-                                      //     //         content:  Text('Image removed'),
-                                      //     //       );
-                                      //     //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                      //     //
-                                      //     //     });
-                                      //     //   },
-                                      //     // );
-                                      //   }, icon: const Icon(Icons.delete)),
-                                      // )
-                                    ],
-                                ),
+                                 return Padding(
+                                   padding: const EdgeInsets.all(8.0),
+                                   child: ImageListView(imageListResponse: state.favouriteImageList[index], onTap: (){
+                                     showDialog(
+                                       context: context,
+                                       builder: (BuildContext context) {
+                                         return alert(onTapNo: (){
+                                           Navigator.pop(context);
+                                         }, onTapYes: () {
+                                           BlocProvider.of<FavouriteImageListCubit>(context).
+                                           removeFavoriteImage(state.favouriteImageList[index]);
+                                           const snackBar = SnackBar(
+                                             content:  Text('Image removed'),
+                                           );
+                                           Navigator.pop(context);
+                                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                         });
+                                       },
+                                     );
+                                   }),
                                  );
                               }
                         ), gridDelegate:

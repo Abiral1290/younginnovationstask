@@ -10,9 +10,9 @@ part of 'image_list_api_services.dart';
 
 class _ImageListApiServices implements ImageListApiServices {
   _ImageListApiServices(
-      this._dio, {
-        this.baseUrl,
-      }) {
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'https://pixabay.com/api/';
   }
 
@@ -22,9 +22,9 @@ class _ImageListApiServices implements ImageListApiServices {
 
   @override
   Future<HttpResponse<List<ImageListResponse>>> getImageList(
-      String query,
-      int page,
-      ) async {
+    String query,
+    int page,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'q': query,
@@ -37,18 +37,18 @@ class _ImageListApiServices implements ImageListApiServices {
 
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<List<ImageListResponse>>>(Options(
-          method: 'GET',
-          headers: _headers,
-          extra: _extra,
-        )
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
             .compose(
-          _dio.options,
-          '?key=38694853-16327057edc4b85f69d46ce21',
-          queryParameters: queryParameters,
-          data: _data,
-        )
+              _dio.options,
+              '?key=38694853-16327057edc4b85f69d46ce21',
+              queryParameters: queryParameters,
+              data: _data,
+            )
             .copyWith(
-            baseUrl: _combineBaseUrls(
+                baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
             ))));
@@ -79,9 +79,9 @@ class _ImageListApiServices implements ImageListApiServices {
   }
 
   String _combineBaseUrls(
-      String dioBaseUrl,
-      String? baseUrl,
-      ) {
+    String dioBaseUrl,
+    String? baseUrl,
+  ) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }

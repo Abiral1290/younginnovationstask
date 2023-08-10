@@ -1,5 +1,8 @@
+
 const String appTitle = 'Countries List';
 const String toast = 'Value Change Successfully';
+const String imageList = 'Image List';
+const String favouriteImageList = 'Favourite Image List';
 
 // Networking and APIs
 const String baseUrl = 'https://pixabay.com/api/';

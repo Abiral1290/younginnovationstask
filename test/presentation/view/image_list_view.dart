@@ -10,7 +10,7 @@ void main(){
       )
     );
 
-    final charac = find.text('Afghanistan');
+    final charac = find.text('ELG21');
 
     expect(charac, findsOneWidget);
   } );

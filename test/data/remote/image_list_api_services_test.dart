@@ -3,10 +3,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:younginnovationstask/src/data/datasources/remote/image_list_api_services.dart';
 import 'package:younginnovationstask/src/data/repositories/api_repository_implementation.dart';
 import 'package:younginnovationstask/src/domain/model/response/image_list_response.dart';
 
-class MockCountryApiServices extends Mock implements CountryApiService{}
+class MockImageListApiServices extends Mock implements ImageListApiServices{}
 
 
 @GenerateMocks(<Type>[MockImageListApiServices])
@@ -29,17 +30,11 @@ void main() {
   RequestOptions requestOptions =RequestOptions(path: '');
   test('request  fetch news', () async {
       Response response = Response(requestOptions: requestOptions) ;
-  //  response.data = country;
-    when(mockImageListApiServices.getCountryList())
+
+    when(mockImageListApiServices.getImageList('', 1))
         .thenAnswer((_) async => HttpResponse(country,response));
-    final ApiRepositoryImplementation apiRepositoryImplementation =
-    ApiRepositoryImplementation(mockImageListApiServices);
-    // final List<Country> responses = await apiRepositoryImplementation.
-    // getCountryList(request: CountryRequest(
-    //     sources: '',
-    //     page: 0,
-    //     pageSize: 0
-    // ));
+     ApiRepositoryImplementation(mockImageListApiServices);
+
      expect(country,  '');
   });
 }
